@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: "Outfit", sans-serif;
+    width: 1300px;
+    margin: auto;
+    padding: 20px 0px;
+    
+}
+button{
+    cursor: pointer;
+}
+.counter_app_title{
+    text-align: center;
+    background: linear-gradient(to right, #b3b3e4, #a126a1);
+    background-clip: text;
+    color: transparent;
+    font-size: 30px;
+}
+.counter_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin: 50px 20px;
+   
+}
+.input_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+input{
+    padding: 10px 10px;
+    outline: none;
+}
+
+.counter_div .increase{
+    padding: 5px 10px;
+    background-color: #a126a1;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+}
+.counter_div .decrease{
+    padding: 5px 10px;
+    background-color: #6767e9;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.counter_div .reset{
+    padding: 5px 10px;
+    background-color: #eb89eb;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+}
