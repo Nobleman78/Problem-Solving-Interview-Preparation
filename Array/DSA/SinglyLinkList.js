@@ -32,9 +32,11 @@ class SinglyLinkList {
 
         }
         let curr = this.head
+        // Iterating the List and delete the thrid, fourth, fifth......,
         while (curr.next && curr.next.value !== value) {
             curr = curr.next
         }
+        // Deleting Second Value
         if (curr.next) {
             curr.next = curr.next.next
         }
@@ -69,5 +71,4 @@ list.insert(1);
 list.insert(2);
 list.insert(3);
 list.delete(3)
-list.update(2, 500)
 list.print();

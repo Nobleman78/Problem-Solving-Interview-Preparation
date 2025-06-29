@@ -41,7 +41,7 @@ class DoublyLinkedList {
             }
         }
         else {
-            console.log('Position is out of bounds')
+           return
         }
 
         /* Insert At the beginning*/
@@ -59,7 +59,6 @@ class DoublyLinkedList {
 
         }
         if (!current || (!current.next && index < position - 1)) {
-            console.log('Out Of Bounds')
             return
         }
         // Insert At the End
@@ -74,6 +73,25 @@ class DoublyLinkedList {
         nextNode.prev = newNode
         newNode.prev = current
         current.next = newNode
+
+    }
+    //Delete from the link list
+
+    delete(value) {
+        if (!this.head && !this.tail) {
+            return
+        }
+        if (this.head.value === value) {
+            this.head = this.head.next
+            return
+        }
+        let current = this.head
+        while (current.next && current.next.value !== value) {
+            current = current.next
+        }
+        if (current.next) {
+            current.next = current.next.next
+        }
 
     }
 
@@ -91,5 +109,7 @@ list.insertAtFirst(20)
 list.insertAtFirst(30)
 list.insertAtFirst(40)
 list.insertAtEnd(50)
+list.delete(30)
+list.delete(50)
 list.insertAtNthPosition(2, 29)
 list.print()
