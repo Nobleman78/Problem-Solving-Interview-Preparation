@@ -5,6 +5,9 @@ const category = {
     salads: ['Greek Salad', 'Caesear Salad', 'Cobb Salad'],
     pizzas: ['Margherita', 'Pepperoni', 'BBQ Chicken']
 }
+const newR={
+    
+}
 
 const listName = Object.keys(category).filter(key =>
     Array.isArray(category[key]) && key !== '_id' && key !== 'Des' && key !== 'title'
