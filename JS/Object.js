@@ -8,7 +8,8 @@ const category = {
 const newR={
     title:'jesmin chakma',
     name:'something',
-    gmail:'jesminchakma392gmail.com'
+    gmail:'jesminchakma392gmail.com',
+    phone:''
     
 
 }
