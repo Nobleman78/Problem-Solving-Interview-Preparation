@@ -6,7 +6,8 @@ const category = {
     pizzas: ['Margherita', 'Pepperoni', 'BBQ Chicken']
 }
 const newR={
-    title:'jesmin chakma'
+    title:'jesmin chakma',
+    name:'something'
 }
 
 
