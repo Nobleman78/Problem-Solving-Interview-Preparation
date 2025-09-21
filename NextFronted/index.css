@@ -1,0 +1,213 @@
+/* Basic Resets & Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Background Changer (from previous discussion) */
+#page-wrapper {
+    transition: background-color 0.5s ease-in-out;
+    min-height: 100vh;
+}
+/* In your style.css */
+
+.bg-dark-blue {
+    background-color: #1a1a2e; /* Example dark blue */
+    color: #fff; /* Text color for dark background */
+    transition: background-color 0.5s ease-in-out;
+}
+
+.bg-red {
+    background-color: #e74c3c; /* Example red */
+    color: #fff; /* Text color for dark background */
+    transition: background-color 0.5s ease-in-out;
+}
+
+.bg-black {
+    background-color: #000000; /* Pure black */
+    color: #fff; /* Text color for dark background */
+    transition: background-color 0.5s ease-in-out;
+}
+
+/* Make sure your main section text also inherits or is set to a contrasting color */
+.review-intro .section-label,
+.review-intro .section-title,
+.review-intro .section-description {
+    color: inherit; /* This will make them white when background is dark */
+} Add more background classes as needed for your main page wrapper */
+
+
+/* Review Section Styling */
+.review-section {
+    padding: 80px 0;
+    background-color: inherit; /* Inherit from #page-wrapper */
+    text-align: center;
+}
+
+.review-intro {
+    margin-bottom: 50px;
+    text-align: left; /* Align intro text left as per image */
+}
+
+.review-intro .section-label {
+    font-size: 0.9em;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.review-intro .section-title {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: inherit; /* Inherit from #page-wrapper */
+}
+
+.review-intro .section-description {
+    font-size: 1.1em;
+    line-height: 1.8;
+    max-width: 500px; /* Limit width for readability */
+    color: inherit; /* Inherit from #page-wrapper */
+}
+
+/* Review Carousel Wrapper */
+.review-carousel-wrapper {
+    position: relative;
+    overflow: hidden; /* Hide overflowing cards */
+    padding: 20px 0; /* Space for partial cards to show */
+}
+
+.review-carousel-track {
+    display: flex; /* Use flexbox for horizontal layout */
+    transition: transform 0.5s ease-in-out; /* Smooth sliding animation */
+    /* Adjust width dynamically with JS, or rely on flex-basis for card widths */
+}
+
+/* Individual Review Card */
+.review-card {
+    /* For large screens, let's make it 2 cards per view */
+    flex: 0 0 calc(50% - 20px); /* Show 2 cards with gaps (20px total for both margins) */
+    margin: 0 10px; /* 10px on each side = 20px total margin between cards */
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    min-height: 250px;
+    box-sizing: border-box;
+    color: #333;
+
+    opacity: 0.7; /* Inactive cards are slightly dimmed */
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.review-card.active {
+    opacity: 1; /* Active card is fully visible */
+    transform: scale(1); /* Active card is full size */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.review-card .quote-icon {
+    font-size: 3em;
+    color: #007bff; /* Example accent color */
+    margin-bottom: 20px;
+    display: block;
+    font-family: serif; /* For a classic quote look if not using Font Awesome */
+    line-height: 1;
+}
+
+.review-card .review-text {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #007bff; /* Accent border */
+}
+
+.reviewer-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.reviewer-title {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+/* Carousel Navigation Arrows */
+.carousel-navigation {
+    display: flex;
+    justify-content: center; /* Center arrows below the carousel */
+    margin-top: 30px;
+    gap: 20px; /* Space between arrows */
+}
+
+.nav-arrow {
+    background-color: #007bff; /* Accent color for arrows */
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-arrow:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .review-card {
+        flex: 0 0 calc(50% - 20px); /* Show 2 cards on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .review-intro {
+        text-align: center; /* Center intro text on small screens */
+    }
+    .review-intro .section-description {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    .review-card {
+        flex: 0 0 calc(100% - 20px); /* Show 1 card per view on small screens */
+    }
+    .review-card.active {
+        margin-left: 10px; /* Keep consistent margin */
+        margin-right: 10px;
+    }
+}

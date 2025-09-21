@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Reveal Effect - Images Collapse/Spread over Text</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styles that cannot be directly moved to Tailwind classes in HTML */
+        body {
+            /* font-family, margin, background-color moved to body tag */
+            -webkit-font-smoothing: antialiased;
+            /* Better font rendering */
+            -moz-osx-font-smoothing: grayscale;
+            /* Better font rendering */
+        }
+
+        .filler-section:nth-child(even) {
+            background-color: #cbd5e1;
+            /* Specific background for even sections */
+        }
+
+
+        .animated-group-wrapper>* {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            will-change: transform, opacity, z-index;
+
+        }
+    </style>
+</head>
+
+<body class="font-sans m-0 bg-gray-100">
+
+    <div
+        class="filler-section h-[80vh] flex justify-center items-center text-2xl text-gray-700 bg-blue-100 mb-5 shadow-inner">
+        Scroll Down to see the collapsed state, then Scroll UP!</div>
+    <div
+        class="filler-section h-[80vh] flex justify-center items-center text-2xl text-gray-700 bg-blue-100 mb-5 shadow-inner">
+        The animated section is below.</div>
+
+    <div id="scrollTriggerSection"
+        class="relative min-h-[120vh] flex items-center justify-center bg-gray-100 py-20 px-4">
+
+        <div
+            class="animated-group-wrapper relative w-full h-[500px] mx-auto bg-[#2e6b52] rounded-lg flex justify-center items-center overflow-hidden">
+
+            <div id="centralText"
+                class="left-1/2 -translate-x-1/2 font-bold text-xl text-white whitespace-nowrap text-center leading-tight">
+                Since 1996 <br> Halal Certified
+            </div>
+
+            <img id="imageLeft"
+                src="https://images.unsplash.com/photo-1751795195789-8dab6693475d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxwxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+                alt="Decorative Left" class="decorative-image object-cover rounded-full">
+            <p>This is demo testing</p>
+            <img id="imageRight"
+                src="https://plus.unsplash.com/premium_photo-1752192844251-b0bbb746ea49?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"
+                alt="Decorative Right" class="decorative-image object-cover rounded-full">
+
+        </div>
+    </div>
+
+    <div
+        class="filler-section h-[80vh] flex justify-center items-center text-2xl text-gray-700 bg-blue-100 mb-5 shadow-inner">
+        Scroll **UP** to **OPEN** the door (images spread, text visible).</div>
+    <div
+        class="filler-section h-[80vh] flex justify-center items-center text-2xl text-gray-700 bg-blue-100 mb-5 shadow-inner">
+        Scroll **DOWN** to **CLOSE** the door (images collapse, text hidden).</div>
+    <div
+        class="filler-section h-[80vh] flex justify-center items-center text-2xl text-gray-700 bg-blue-100 mb-5 shadow-inner">
+        This should be the effect you wanted!</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const imageLeft = document.getElementById('imageLeft');
+        const imageRight = document.getElementById('imageRight');
+        const centralText = document.getElementById('centralText');
+        const scrollTriggerSection = document.getElementById('scrollTriggerSection');
+        const animatedGroupWrapper = document.querySelector('.animated-group-wrapper');
+
+        gsap.set(centralText, { opacity: 1, visibility: 'hidden' });
+        const textWidth = centralText.offsetWidth;
+        gsap.set(centralText, { opacity: 0, visibility: 'visible' });
+
+        const imageWidth = imageLeft.offsetWidth;
+        const overlapAdjustment = 5;
+        const collapsedXLeft = -(textWidth / 2 + imageWidth / 2 + overlapAdjustment); // Left image moves to the right
+        const collapsedXRight = (textWidth / 2 + imageWidth / 2 + overlapAdjustment); // Right image moves to the left
+
+
+        const extraSpread = 20;
+        const spreadXLeft = -((animatedGroupWrapper.offsetWidth / 2) - (imageWidth / 2) - extraSpread);
+        const spreadXRight = ((animatedGroupWrapper.offsetWidth / 2) - (imageWidth / 2) - extraSpread);
+
+
+        const Z_INDEX_IMAGE_SPREAD = 5;
+        const Z_INDEX_IMAGE_COLLAPSED = 15;
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: scrollTriggerSection,
+                start: "top center",
+                end: "bottom center",
+                scrub: true,
+
+            }
+        });
+
+        gsap.set(imageLeft, {
+            x: collapsedXLeft, // Left image is at its collapsed position (closed)
+            zIndex: Z_INDEX_IMAGE_COLLAPSED // Images are in front (closed)
+        });
+        gsap.set(imageRight, {
+            x: collapsedXRight, // Right image is at its collapsed position (closed)
+            zIndex: Z_INDEX_IMAGE_COLLAPSED // Images are in front (closed)
+        });
+        gsap.set(centralText, {
+            opacity: 0, // Text is fully hidden (closed)
+            // zIndex for text doesn't matter much when opacity is 0, but setting it behind images is safe.
+            zIndex: Z_INDEX_IMAGE_SPREAD // Text is behind images (closed)
+        });
+
+
+        // Animate Left Image to its spread position
+        tl.to(imageLeft, {
+            x: spreadXLeft, // Moves left image to its spread position (open)
+            zIndex: Z_INDEX_IMAGE_SPREAD, // Images move behind text (open)
+            ease: "none" // Linear animation for smooth scrubbing
+        }, 0); // All animations start at the same time (position 0 in timeline)
+
+        // Animate Right Image to its spread position
+        tl.to(imageRight, {
+            x: spreadXRight, // Moves right image to its spread position (open)
+            zIndex: Z_INDEX_IMAGE_SPREAD, // Images move behind text (open)
+            ease: "none" // Linear animation for smooth scrubbing
+        }, 0);
+
+        // Animate Central Text opacity to 1 (visible)
+        tl.to(centralText, {
+            opacity: 1, // Text fades in completely (open)
+            zIndex: Z_INDEX_TEXT_VISIBLE, // Text moves to the front (open)
+            ease: "none" // Linear animation for smooth scrubbing
+        }, 0);
+
+    </script>
+</body>
+
+</html>

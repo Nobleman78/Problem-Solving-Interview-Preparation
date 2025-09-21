@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Clipped Circle Icons</title>
+    <style>
+        body {
+            margin: 0;
+            background: #f2f2f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: sans-serif;
+        }
+
+        .circle-menu {
+            position: relative;
+            width: 350px;
+            height: 350px;
+        }
+
+        .icon-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 100%);
+            transform-origin: center center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .icon-box img {
+            width: 40px;
+            height: auto;
+            transform: rotate(calc(-1 * var(--rotate)));
+        }
+
+        /* Position each with rotation and offset */
+        .item1 {
+            transform: rotate(0deg) translate(0, -150px);
+            --rotate: 0deg;
+        }
+
+        .item2 {
+            transform: rotate(60deg) translate(0, -150px);
+            --rotate: 60deg;
+        }
+
+        .item3 {
+            transform: rotate(120deg) translate(0, -150px);
+            --rotate: 120deg;
+        }
+
+        .item4 {
+            transform: rotate(180deg) translate(0, -150px);
+            --rotate: 180deg;
+        }
+
+        .item5 {
+            transform: rotate(240deg) translate(0, -150px);
+            --rotate: 240deg;
+        }
+
+        .item6 {
+            transform: rotate(300deg) translate(0, -150px);
+            --rotate: 300deg;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="circle-menu">
+        <div class="icon-box item1">
+            <img src="https://seeklogo.com/images/B/bkash-logo-00468369C9-seeklogo.com.png" alt="bkash">
+        </div>
+        <div class="icon-box item2">
+            <img src="https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg" alt="nagad">
+        </div>
+        <div class="icon-box item3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Rocket_logo.svg" alt="rocket">
+        </div>
+        <div class="icon-box item4">
+            <img src="https://cellfin.com.bd/wp-content/uploads/2021/04/CellFin-logo.png" alt="cellfin">
+        </div>
+        <div class="icon-box item5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="visa">
+        </div>
+        <div class="icon-box item6">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="mastercard">
+        </div>
+    </div>
+
+</body>
+
+</html>
